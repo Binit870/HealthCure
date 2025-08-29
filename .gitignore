@@ -1,6 +1,5 @@
-# Environment files
-.env
-.env.local
-.env.development
-.env.production
-/node modules
+# Ignore all .env files in any folder
+.env*
+
+# Ignore node modules folders
+node_modules/

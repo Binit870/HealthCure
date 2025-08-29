@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { FaBars, FaSearch, FaTimes } from 'react-icons/fa';
+import { FaBars, FaSearch, FaTimes, FaUserCircle, FaFileAlt, FaCalendarCheck, FaCog, FaSignOutAlt, FaPlusSquare } from 'react-icons/fa';
 
 const Navbar = () => {
     // State to simulate user login status
@@ -15,6 +15,12 @@ const Navbar = () => {
         }
     };
 
+    // Handles the logout functionality
+    const handleLogout = () => {
+        setIsLoggedIn(false);
+        setIsSidebarOpen(false); // Close sidebar on logout
+    };
+
     return (
         <>
             <nav className="fixed top-0 left-0 w-full z-50 backdrop-blur-3xl bg-white/10 border-b border-white/20 backdrop-filter shadow-md">
@@ -26,8 +32,9 @@ const Navbar = () => {
                                 <FaBars />
                             </button>
                         )}
-                        <Link to="/" className="text-2xl font-bold text-gradient cursor-pointer">
-                            HealthCure
+                        <Link to="/" className="flex items-center space-x-2 text-2xl font-bold text-gradient cursor-pointer">
+                            <FaPlusSquare className="text-pink-500" /> {/* Health Cure Icon */}
+                            <span>HealthCure</span>
                         </Link>
                     </div>
 
@@ -37,6 +44,7 @@ const Navbar = () => {
                         <a href="#dashboard">Dashboard</a>
                         <a href="#doctors">Doctors</a>
                         <a href="#appointment">Appointment</a>
+                        <a href="#reports">Reports</a>
                         <a href="#community">Community</a>
                     </div>
 
@@ -82,10 +90,31 @@ const Navbar = () => {
                             </button>
                         </div>
                         <ul className="space-y-4">
-                            <li><Link to="/profile" className="block py-2 hover:bg-gray-800 rounded">Profile</Link></li>
-                            <li><Link to="/reports" className="block py-2 hover:bg-gray-800 rounded">Reports</Link></li>
-                            <li><Link to="/appointments" className="block py-2 hover:bg-gray-800 rounded">My Appointments</Link></li>
-                            <li><Link to="/settings" className="block py-2 hover:bg-gray-800 rounded">Settings</Link></li>
+                            <li>
+                                <Link to="/profile" className="flex items-center space-x-2 py-2 hover:bg-gray-800 rounded">
+                                    <FaUserCircle /> <span>Profile</span>
+                                </Link>
+                            </li>
+                            <li>
+                                <Link to="/reports" className="flex items-center space-x-2 py-2 hover:bg-gray-800 rounded">
+                                    <FaFileAlt /> <span>Reports</span>
+                                </Link>
+                            </li>
+                            <li>
+                                <Link to="/appointments" className="flex items-center space-x-2 py-2 hover:bg-gray-800 rounded">
+                                    <FaCalendarCheck /> <span>My Appointments</span>
+                                </Link>
+                            </li>
+                            <li>
+                                <Link to="/settings" className="flex items-center space-x-2 py-2 hover:bg-gray-800 rounded">
+                                    <FaCog /> <span>Settings</span>
+                                </Link>
+                            </li>
+                            <li>
+                                <button onClick={handleLogout} className="flex items-center space-x-2 py-2 w-full text-left hover:bg-gray-800 rounded">
+                                    <FaSignOutAlt /> <span>Logout</span>
+                                </button>
+                            </li>
                         </ul>
                     </div>
                 </div>

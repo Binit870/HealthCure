@@ -1,107 +1,18 @@
 import React, { useEffect } from 'react';
-import Navbar from '../components/Navbar';
-import Footer from '../components/Footer';
-import { 
-  FaHeartbeat, 
-  FaRunning, 
-  FaBed, 
-  FaMicroscope, 
-  FaCalendarCheck, 
-  FaMapMarkerAlt, 
-  FaAppleAlt, 
-  FaArrowUp 
+import './LandingPage.css'; // external stylesheet
+import {
+  FaHeartbeat,
+  FaRunning,
+  FaBed,
+  FaMicroscope,
+  FaCalendarCheck,
+  FaMapMarkerAlt,
+  FaAppleAlt
 } from 'react-icons/fa';
-
-// Custom CSS for animations and styling
-const customStyles = `
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
-    body {
-        font-family: 'Inter', sans-serif;
-        background-color: #f0f4f8;
-        color: #333;
-    }
-    .container {
-        max-width: 1200px;
-    }
-    .card {
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-    .card:hover {
-        transform: translateY(-8px);
-        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25);
-    }
-    .text-gradient {
-        background-image: linear-gradient(to right, #6EE7B7, #3B82F6);
-        -webkit-background-clip: text;
-        background-clip: text;
-        color: transparent;
-    }
-    .hero-animated-bg {
-        background-image: linear-gradient(45deg, #e0f2fe, #dcfce7, #dbeafe);
-        background-size: 400% 400%;
-        animation: gradient-animation 15s ease infinite;
-    }
-    @keyframes gradient-animation {
-        0% { background-position: 0% 50%; }
-        50% { background-position: 100% 50%; }
-        100% { background-position: 0% 50%; }
-    }
-    .scroll-to-top {
-        position: fixed;
-        bottom: 20px;
-        right: 20px;
-        z-index: 100;
-        opacity: 0;
-        visibility: hidden;
-        transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.2s ease;
-        transform: translateY(8px);
-    }
-    .scroll-to-top.show {
-        opacity: 1;
-        visibility: visible;
-        transform: translateY(0);
-    }
-    .chat-message.sent {
-        background-color: #3b82f6;
-        color: white;
-        border-bottom-right-radius: 0;
-    }
-    .chat-message.received {
-        background-color: rgba(255,255,255,0.12);
-        color: #fff;
-        border-bottom-left-radius: 0;
-    }
-    /* Fade-in animation for hero section */
-    @keyframes fadeIn {
-        from { opacity: 0; transform: translateY(20px); }
-        to { opacity: 1; transform: translateY(0); }
-    }
-    .animate-fade-in {
-        animation: fadeIn 1s ease-out forwards;
-    }
-    .animate-fade-in-delay {
-        animation: fadeIn 1s ease-out 0.3s forwards;
-        opacity: 0;
-    }
-    /* Section fade-in on scroll */
-    .fade-in-on-scroll {
-        opacity: 0;
-        transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-        transform: translateY(20px);
-    }
-    .fade-in-on-scroll.is-visible {
-        opacity: 1;
-        transform: translateY(0);
-    }
-`;
 
 const LandingPage = () => {
   useEffect(() => {
-    const styleSheet = document.createElement("style");
-    styleSheet.type = "text/css";
-    styleSheet.innerText = customStyles;
-    document.head.appendChild(styleSheet);
-
+    // Smooth scroll for anchor links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
       anchor.addEventListener('click', function (e) {
         e.preventDefault();
@@ -114,6 +25,7 @@ const LandingPage = () => {
       });
     });
 
+    // Intersection Observer for fade-in animations
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -121,50 +33,42 @@ const LandingPage = () => {
           observer.unobserve(entry.target);
         }
       });
-    }, {
-      threshold: 0.1
-    });
+    }, { threshold: 0.1 });
 
     document.querySelectorAll('.fade-in-on-scroll').forEach(section => {
       observer.observe(section);
     });
 
+    // Scroll-to-top button
     const scrollToTopBtn = document.getElementById("scrollToTopBtn");
     const handleScroll = () => {
       if (window.scrollY > 300) {
-        if (scrollToTopBtn) scrollToTopBtn.classList.add("show");
+        scrollToTopBtn?.classList.add("show");
       } else {
-        if (scrollToTopBtn) scrollToTopBtn.classList.remove("show");
+        scrollToTopBtn?.classList.remove("show");
       }
     };
 
     const handleScrollToTop = () => {
-      window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-      });
+      window.scrollTo({ top: 0, behavior: "smooth" });
     };
 
     window.addEventListener("scroll", handleScroll);
-    if (scrollToTopBtn) {
-      scrollToTopBtn.addEventListener("click", handleScrollToTop);
-    }
+    scrollToTopBtn?.addEventListener("click", handleScrollToTop);
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
-      if (scrollToTopBtn) {
-        scrollToTopBtn.removeEventListener("click", handleScrollToTop);
-      }
-      document.head.removeChild(styleSheet);
+      scrollToTopBtn?.removeEventListener("click", handleScrollToTop);
       observer.disconnect();
     };
   }, []);
 
+
   return (
     <div className="bg-gradient-to-br from-cyan-900 to-blue-900 min-h-screen pt-8 text-white">
-      <Navbar />
 
-      <main className="container mx-auto px-4 py-12">
+
+      <main className="container mx-auto px-4 py-12 mt-20">
         {/* HERO */}
         <section id="hero" className="text-center py-20 hero-animated-bg rounded-3xl shadow-lg mb-16 relative overflow-hidden">
           <div className="relative z-10">
@@ -241,10 +145,10 @@ const LandingPage = () => {
               </div>
             </div>
             <div className="p-4 border-t border-white/10 flex space-x-2 bg-slate-900/30">
-              <input 
-                type="text" 
-                placeholder="Type your message..." 
-                className="flex-grow p-3 rounded-full border border-white/10 bg-slate-800 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500" 
+              <input
+                type="text"
+                placeholder="Type your message..."
+                className="flex-grow p-3 rounded-full border border-white/10 bg-slate-800 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
               <button className="bg-blue-600 text-white rounded-full w-12 h-12 flex items-center justify-center hover:bg-blue-700 transition duration-300">
                 <i className="fas fa-paper-plane"></i>
@@ -424,31 +328,31 @@ const LandingPage = () => {
             <form className="space-y-6">
               <div>
                 <label htmlFor="name" className="block text-white font-semibold mb-2">Your Name</label>
-                <input 
-                  type="text" 
-                  id="name" 
-                  name="name" 
-                  className="w-full p-3 rounded-xl border border-white/10 bg-slate-800 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500" 
-                  placeholder="Enter your name" 
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  className="w-full p-3 rounded-xl border border-white/10 bg-slate-800 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  placeholder="Enter your name"
                 />
               </div>
               <div>
                 <label htmlFor="email" className="block text-white font-semibold mb-2">Your Email</label>
-                <input 
-                  type="email" 
-                  id="email" 
-                  name="email" 
-                  className="w-full p-3 rounded-xl border border-white/10 bg-slate-800 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500" 
-                  placeholder="Enter your email" 
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  className="w-full p-3 rounded-xl border border-white/10 bg-slate-800 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  placeholder="Enter your email"
                 />
               </div>
               <div>
                 <label htmlFor="message" className="block text-white font-semibold mb-2">Message</label>
-                <textarea 
-                  id="message" 
-                  name="message" 
-                  rows="5" 
-                  className="w-full p-3 rounded-xl border border-white/10 bg-slate-800 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500" 
+                <textarea
+                  id="message"
+                  name="message"
+                  rows="5"
+                  className="w-full p-3 rounded-xl border border-white/10 bg-slate-800 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
                   placeholder="Type your message here..."
                 ></textarea>
               </div>
@@ -463,16 +367,9 @@ const LandingPage = () => {
         </section>
       </main>
 
-      <Footer />
 
-      {/* Scroll to Top Button (wired to your styles & effect) */}
-      <button
-        id="scrollToTopBtn"
-        aria-label="Scroll to top"
-        className="scroll-to-top bg-white/20 hover:bg-white/30 text-white p-3 rounded-full shadow-lg backdrop-blur-md"
-      >
-        <FaArrowUp />
-      </button>
+
+
     </div>
   );
 };
