@@ -5,27 +5,53 @@ import Footer from './components/Footer';
 import LandingPage from './pages/LandingPage';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
-
+import SearchResults from './components/SearchResults';
+import ChatWithAssistant from './pages/ChatWithAssistant';
+import ProtectedRoute from './components/ProtectedRoute';
+import SymptomChecker from './pages/SymptomChecker';
 function App() {
   const location = useLocation();
 
-  // hide Navbar/Footer only on login & signup pages
-  const hideNavFooter =
-    location.pathname === '/login' || location.pathname === '/signup';
+  // Define which paths should hide the navbar and footer
+  const pathsWithoutNavbar = ['/login', '/signup'];
+  const pathsWithoutFooter = ['/login', '/signup', '/chat'];
+
+  const hideNavbar = pathsWithoutNavbar.includes(location.pathname);
+  const hideFooter = pathsWithoutFooter.includes(location.pathname);
 
   return (
-    <div className="flex flex-col min-h-screen">
-      {!hideNavFooter && <Navbar />}
+    <div className="flex flex-col min-h-screen bg-gradient-to-br from-cyan-900 to-blue-900 font-inter">
+      {!hideNavbar && <Navbar />}
 
-      <main className="flex-grow pt-20">
+      <div className="flex-grow flex flex-col pt-16">
         <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
-        </Routes>
-      </main>
 
-      {!hideNavFooter && <Footer />}
+          {/* Protected routes */}
+          <Route
+            path="/chat"
+            element={
+              <ProtectedRoute>
+                <ChatWithAssistant />
+              </ProtectedRoute>
+            }
+          />
+          <Route path="/symptom-checker" element={<ProtectedRoute><SymptomChecker /></ProtectedRoute>} />
+
+          <Route
+            path="/search"
+            element={
+              <ProtectedRoute>
+                <SearchResults />
+              </ProtectedRoute>
+            }
+          />
+        </Routes>
+      </div>
+
+      {!hideFooter && <Footer />}
     </div>
   );
 }

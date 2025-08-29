@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import './LandingPage.css'; // external stylesheet
 import {
   FaHeartbeat,
@@ -7,9 +8,10 @@ import {
   FaMicroscope,
   FaCalendarCheck,
   FaMapMarkerAlt,
-  FaAppleAlt
+  FaAppleAlt,
+  FaPaperPlane
 } from 'react-icons/fa';
-
+import healthImage from '../assets/healthcare.png'; // Example image import
 const LandingPage = () => {
   useEffect(() => {
     // Smooth scroll for anchor links
@@ -68,94 +70,161 @@ const LandingPage = () => {
     <div className="bg-gradient-to-br from-cyan-900 to-blue-900 min-h-screen pt-8 text-white">
 
 
-      <main className="container mx-auto px-4 py-12 mt-20">
+      <main className="container mx-auto px-4 py-12 ">
         {/* HERO */}
-        <section id="hero" className="text-center py-20 hero-animated-bg rounded-3xl shadow-lg mb-16 relative overflow-hidden">
-          <div className="relative z-10">
-            <h2 className="text-5xl md:text-6xl font-black text-gray-900 mb-4 animate-fade-in">Your Partner in Health and Wellness</h2>
-            <p className="text-lg md:text-xl text-gray-700 max-w-3xl mx-auto mb-8 animate-fade-in-delay">
+        <section
+          id="hero"
+          className="relative w-full h-screen flex items-center justify-center overflow-hidden rounded-3xl shadow-lg mb-16"
+        >
+          {/* Full Width Background Image */}
+          <img
+            src={healthImage}
+            alt="Health and Wellness"
+            className="absolute inset-0 w-full h-full object-cover"
+          />
+
+          {/* Dark overlay (optional, for readability) */}
+          <div className="absolute inset-0 bg-black/40"></div>
+
+          {/* Text Content Overlay */}
+          <div className="relative z-10 text-center px-6">
+            <h2 className="text-5xl md:text-6xl font-black text-white mb-4 animate-fade-in">
+              Your Partner in Health and Wellness
+            </h2>
+            <p className="text-lg md:text-xl text-gray-200 max-w-3xl mx-auto mb-8 animate-fade-in-delay">
               Manage your health from one place. Check symptoms, book appointments, find doctors, and get personalized diet plans.
             </p>
-            <a href="#services" className="inline-block bg-blue-600 text-white font-bold py-4 px-10 rounded-full shadow-lg hover:bg-blue-700 transition duration-300 transform hover:scale-105">
+            <a
+              href="#services"
+              className="inline-block bg-cyan-600 text-white font-bold py-4 px-10 rounded-full shadow-lg hover:bg-cyan-700 transition duration-300 transform hover:scale-105"
+            >
               Explore Services
             </a>
           </div>
         </section>
 
+
+
+
         {/* SERVICES (cards: now gradients + bright text) */}
-        <section id="services" className="py-12 rounded-3xl shadow-2xl fade-in-on-scroll p-8 mb-16 bg-white/10 backdrop-blur-xl border border-white/10">
-          <h3 className="text-4xl font-extrabold text-white text-center mb-12">Our Core Services</h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            <div className="card rounded-3xl p-8 shadow-md flex flex-col items-center text-center bg-gradient-to-br from-blue-600 to-indigo-700 text-white">
-              <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mb-4 text-white text-3xl">
-                <FaMicroscope />
-              </div>
-              <h4 className="text-2xl font-semibold mb-2">Symptom Checker</h4>
-              <p className="text-gray-200">Identify potential diseases based on your symptoms using our smart algorithm.</p>
-            </div>
-
-            <div className="card rounded-3xl p-8 shadow-md flex flex-col items-center text-center bg-gradient-to-br from-emerald-600 to-green-700 text-white">
-              <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mb-4 text-white text-3xl">
-                <FaCalendarCheck />
-              </div>
-              <h4 className="text-2xl font-semibold mb-2">Book Appointment</h4>
-              <p className="text-gray-200">Schedule a visit with qualified doctors in your vicinity with just a few clicks.</p>
-            </div>
-
-            <div className="card rounded-3xl p-8 shadow-md flex flex-col items-center text-center bg-gradient-to-br from-purple-600 to-indigo-700 text-white">
-              <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mb-4 text-white text-3xl">
-                <FaMapMarkerAlt />
-              </div>
-              <h4 className="text-2xl font-semibold mb-2">Find Doctors</h4>
-              <p className="text-gray-200">See the live location and availability of nearby doctors and clinics on a map.</p>
-            </div>
-
-            <div className="card rounded-3xl p-8 shadow-md flex flex-col items-center text-center bg-gradient-to-br from-amber-500 to-orange-600 text-white">
-              <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mb-4 text-white text-3xl">
-                <FaAppleAlt />
-              </div>
-              <h4 className="text-2xl font-semibold mb-2">Diet Planner</h4>
-              <p className="text-gray-100">Get personalized diet and nutrition plans to help you achieve your health goals.</p>
-            </div>
+        <section
+      id="services"
+      className="py-12 rounded-3xl shadow-2xl fade-in-on-scroll p-8 mb-16 bg-white/10 backdrop-blur-xl border border-white/10"
+    >
+      <h3 className="text-4xl font-extrabold text-white text-center mb-12">
+        Our Core Services
+      </h3>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        
+        {/* Symptom Checker */}
+        <Link
+          to="/symptom-checker"
+          className="card rounded-3xl p-8 shadow-md flex flex-col items-center text-center bg-gradient-to-br from-blue-600 to-indigo-700 text-white transition transform hover:scale-105 hover:shadow-xl"
+        >
+          <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mb-4 text-white text-3xl">
+            <FaMicroscope />
           </div>
-        </section>
+          <h4 className="text-2xl font-semibold mb-2">Symptom Checker</h4>
+          <p className="text-gray-200">
+            Identify potential diseases based on your symptoms using our smart algorithm.
+          </p>
+        </Link>
+
+        {/* Book Appointment */}
+        <Link
+          to="/book-appointment"
+          className="card rounded-3xl p-8 shadow-md flex flex-col items-center text-center bg-gradient-to-br from-emerald-600 to-green-700 text-white transition transform hover:scale-105 hover:shadow-xl"
+        >
+          <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mb-4 text-white text-3xl">
+            <FaCalendarCheck />
+          </div>
+          <h4 className="text-2xl font-semibold mb-2">Book Appointment</h4>
+          <p className="text-gray-200">
+            Schedule a visit with qualified doctors in your vicinity with just a few clicks.
+          </p>
+        </Link>
+
+        {/* Find Doctors */}
+        <Link
+          to="/find-doctors"
+          className="card rounded-3xl p-8 shadow-md flex flex-col items-center text-center bg-gradient-to-br from-purple-600 to-indigo-700 text-white transition transform hover:scale-105 hover:shadow-xl"
+        >
+          <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mb-4 text-white text-3xl">
+            <FaMapMarkerAlt />
+          </div>
+          <h4 className="text-2xl font-semibold mb-2">Find Doctors</h4>
+          <p className="text-gray-200">
+            See the live location and availability of nearby doctors and clinics on a map.
+          </p>
+        </Link>
+
+        {/* Diet Planner */}
+        <Link
+          to="/diet-planner"
+          className="card rounded-3xl p-8 shadow-md flex flex-col items-center text-center bg-gradient-to-br from-amber-500 to-orange-600 text-white transition transform hover:scale-105 hover:shadow-xl"
+        >
+          <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mb-4 text-white text-3xl">
+            <FaAppleAlt />
+          </div>
+          <h4 className="text-2xl font-semibold mb-2">Diet Planner</h4>
+          <p className="text-gray-100">
+            Get personalized diet and nutrition plans to help you achieve your health goals.
+          </p>
+        </Link>
+
+      </div>
+    </section>
 
         {/* ASSISTANT (container and chat on dark surfaces) */}
-        <section id="assistant" className="py-12 rounded-3xl shadow-lg mb-16 p-8 md:p-12 text-center fade-in-on-scroll bg-white/10 backdrop-blur-xl border border-white/10">
+        <section
+          id="assistant"
+          className="py-12 rounded-3xl shadow-lg mb-16 p-8 md:p-12 text-center fade-in-on-scroll bg-white/10 backdrop-blur-xl border border-white/10"
+        >
           <h3 className="text-4xl font-extrabold text-white mb-6">Your Personal Health Assistant</h3>
           <p className="text-gray-200 max-w-2xl mx-auto mb-8">
             Chat with our AI-powered assistant for instant answers to your health-related questions.
           </p>
+
           <div className="rounded-3xl shadow-xl border border-white/10 overflow-hidden bg-slate-900/40">
+            {/* Preview Chat Window */}
             <div className="h-96 p-6 overflow-y-auto space-y-4">
               <div className="flex justify-start">
-                <div className="chat-message received max-w-md p-4 rounded-3xl">
+                <div className="chat-message received max-w-md p-4 rounded-3xl bg-gray-200 text-black">
                   Hi there! How can I help you with your health today?
                 </div>
               </div>
               <div className="flex justify-end">
-                <div className="chat-message sent max-w-md p-4 rounded-3xl">
+                <div className="chat-message sent max-w-md p-4 rounded-3xl bg-blue-600 text-white">
                   What are the symptoms of the flu?
                 </div>
               </div>
               <div className="flex justify-start">
-                <div className="chat-message received max-w-md p-4 rounded-3xl">
+                <div className="chat-message received max-w-md p-4 rounded-3xl bg-gray-200 text-black">
                   Common flu symptoms include fever, body aches, sore throat, and a cough.
                 </div>
               </div>
             </div>
+
+            {/* Redirect to Full Chat Page */}
             <div className="p-4 border-t border-white/10 flex space-x-2 bg-slate-900/30">
               <input
                 type="text"
                 placeholder="Type your message..."
-                className="flex-grow p-3 rounded-full border border-white/10 bg-slate-800 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="flex-grow p-3 rounded-full border border-white/10 bg-slate-800 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 cursor-pointer"
+                onFocus={() => (window.location.href = "/chat")}
               />
-              <button className="bg-blue-600 text-white rounded-full w-12 h-12 flex items-center justify-center hover:bg-blue-700 transition duration-300">
-                <i className="fas fa-paper-plane"></i>
-              </button>
+
+              <a
+                href="/chat"
+                className="bg-blue-600 text-white rounded-full w-12 h-12 flex items-center justify-center hover:bg-blue-700 transition duration-300"
+              >
+                <i className="fas fa-paper-plane"><FaPaperPlane /></i>
+              </a>
+
             </div>
           </div>
         </section>
+
 
         {/* DASHBOARD (cards: gradients + white text) */}
         <section id="dashboard" className="py-12 bg-gradient-to-br from-gray-800 to-gray-600 rounded-3xl shadow-lg mb-16 p-8 md:p-12 text-center text-white fade-in-on-scroll">

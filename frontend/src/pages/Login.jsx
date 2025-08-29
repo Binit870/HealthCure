@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
-import loginBg from "../assets/login img.png";
+import loginBg from "../assets/bg.png";
 import { useAuth } from "../context/AuthContext.jsx";
 
 const Login = () => {

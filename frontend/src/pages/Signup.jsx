@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
-import signupBg from "../assets/signupimg.png";
+import signupBg from "../assets/bg.png";
 import { useAuth } from "../context/AuthContext.jsx";
 
 const Signup = () => {

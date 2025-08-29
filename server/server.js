@@ -3,7 +3,7 @@ import cors from "cors";
 import connectDB from "./config/db.js";
 import dotenv from "dotenv";
 import authRoutes from "./routes/authRoutes.js"; // ✅ Ensure .js extension
-
+import aiRoutes from "./routes/aiRoutes.js"; // ✅ Ensure .js extension
 dotenv.config();
 
 const app = express();
@@ -12,6 +12,7 @@ app.use(cors());
 
 // Routes
 app.use("/api/auth", authRoutes);
+app.use("/api/ai", aiRoutes);
 
 // Connect to MongoDB
 connectDB();

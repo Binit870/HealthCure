@@ -46,9 +46,16 @@ export const AuthProvider = ({ children }) => {
       throw new Error(err.response?.data?.message || "Login failed");
     }
   };
+  const logout = () => {
+  localStorage.removeItem("token");
+  localStorage.removeItem("user");
+  setToken(null);
+  setUser(null);
+};
+
 
   return (
-    <AuthContext.Provider value={{ user, token, signup, login }}>
+    <AuthContext.Provider value={{ user, token, signup, login, logout }}>
       {children}
     </AuthContext.Provider>
   );
